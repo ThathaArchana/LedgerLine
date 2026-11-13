@@ -1,5 +1,11 @@
 # LedgerLine API
 
+## Live Deployment & Demo
+
+- **Demo Video (YouTube):** [https://youtu.be/7P7nAbpjxaU](https://youtu.be/7P7nAbpjxaU)
+- **Live API Health Check:** [https://ledgerline-api-1vid.onrender.com/api/health](https://ledgerline-api-1vid.onrender.com/api/health)
+- **Live Frontend:** [https://ledgerline-frontend-wwn8.onrender.com](https://ledgerline-frontend-wwn8.onrender.com)
+
 ## Features
 
 - Customer signup requests remain pending until an admin approves them; only active users can log in and receive JWT access tokens. Passwords are BCrypt-hashed.

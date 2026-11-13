@@ -37,6 +37,16 @@ function formatDate(value) {
   });
 }
 
+function resolveApiUrl(rawUrl) {
+  const trimmed = (rawUrl || "").trim().replace(/\/+$/, "");
+  if (!trimmed) return "http://localhost:8080/api";
+  if (trimmed.startsWith("/")) {
+    return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+  }
+  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+  return withProtocol.endsWith("/api") ? withProtocol : `${withProtocol}/api`;
+}
+
 function App() {
   const [resetToken, setResetToken] = useState(() => {
     const tokenFromLink = new URLSearchParams(window.location.hash.slice(1)).get("resetToken") || "";
@@ -72,7 +82,7 @@ function App() {
   const [adminMessage, setAdminMessage] = useState("");
   const [isAdminLoading, setIsAdminLoading] = useState(false);
 
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+  const apiUrl = resolveApiUrl(import.meta.env.VITE_API_URL);
   const visibleNavigation = currentUser?.role === "ADMIN"
     ? [...navigation, { id: "admin", label: "Admin dashboard", icon: "✓" }]
     : navigation;
